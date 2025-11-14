@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Mentorship</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<nav><a href="index.html">Home</a></nav>
+<div class="container">
+  <h2>Mentorship</h2>
+  <form id="mForm">
+    <input id="student_id" placeholder="Student ID" required>
+    <button type="submit">Offer Mentorship</button>
+  </form>
+</div>
+<script>
+const api = "http://localhost:5000/api";
+document.getElementById('mForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem('token');
+  const payload = { student_id: parseInt(document.getElementById('student_id').value) };
+  const res = await fetch(api + '/mentorships/request', { method:'POST', headers: {'Content-Type':'application/json', 'Authorization': token? 'Bearer ' + token : ''}, body: JSON.stringify(payload)});
+  const data = await res.json();
+  alert(JSON.stringify(data));
+});
+</script>
+</body></html>

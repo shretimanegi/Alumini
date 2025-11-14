@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Alumni Register</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<nav><a href="index.html">Home</a></nav>
+<div class="container">
+  <h2>Alumni Register</h2>
+  <form id="regForm">
+    <input id="name" placeholder="Name" required>
+    <input id="email" placeholder="Email" type="email" required>
+    <input id="phone" placeholder="Phone">
+    <input id="password" placeholder="Password" type="password" required>
+    <select id="batch"><option value="">Select Batch</option></select>
+    <select id="dept"><option value="">Select Department</option></select>
+    <input id="position" placeholder="Current Position">
+    <button type="submit">Register</button>
+  </form>
+</div>
+<script>
+const api = "http://localhost:5000/api";
+async function loadMeta(){
+  const batchSelect = document.getElementById('batch');
+  [2018,2019,2020,2021].forEach(y => { let o = document.createElement('option'); o.value = y; o.text = y; batchSelect.add(o);});
+  const dept = document.getElementById('dept');
+  ['Computer Science','Electronics','Mechanical'].forEach(d => { let o = document.createElement('option'); o.value = d; o.text = d; dept.add(o);});
+}
+document.getElementById('regForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const payload = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    password: document.getElementById('password').value,
+    current_position: document.getElementById('position').value
+  };
+  const res = await fetch(api + '/auth/alumni/register', {method:'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+  const data = await res.json();
+  alert(JSON.stringify(data));
+});
+loadMeta();
+</script>
+</body></html>

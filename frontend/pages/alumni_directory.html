@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Alumni Directory</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<nav><a href="index.html">Home</a></nav>
+<div class="container">
+  <h2>Alumni Directory</h2>
+  <div id="list"></div>
+</div>
+<script>
+const api = "http://localhost:5000/api";
+async function loadAll(){
+  document.getElementById('list').innerText = 'Use the backend /api to fetch alumni list (add endpoint in routes/controllers).';
+}
+loadAll();
+</script>
+</body></html>

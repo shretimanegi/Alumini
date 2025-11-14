@@ -1,0 +1,131 @@
+
+/* ========== HERO LANDING PAGE ONLY ========== */
+
+.hero {
+  background: linear-gradient(135deg, #1e88e5, #34d0be);
+  padding: 100px 20px;
+  text-align: center;
+  color: #fff;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.hero-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.hero span {
+  color: #ffffff;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.btn.primary {
+  background: #1fb6ff;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #0f7cd6;
+}
+
+.btn.secondary {
+  background: #fff;
+  border: 2px solid #1e40af;
+  color: #1e40af;
+}
+
+.btn.secondary:hover {
+  background: #eff3ff;
+}
+
+/* WHAT WE OFFER GRID */
+
+.offer-section {
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.offer-section h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.offer-grid {
+  display: grid;
+  max-width: 1100px;
+  margin: auto;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.offer-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  text-align: left;
+  transition: 0.25s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+}
+
+.offer-icon {
+  font-size: 35px;
+  padding: 12px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.blue { background: #e0f0ff; color: #1e88e5; }
+.teal { background: #d4f5ef; color: #009688; }
+.orange { background: #ffe9d6; color: #fb8c00; }
+
+/* CTA SECTION */
+
+.cta {
+  background: #eef3f8;
+  padding: 60px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+}
