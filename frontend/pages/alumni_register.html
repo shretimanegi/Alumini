@@ -1,28 +1,73 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Alumni Register</title><link rel="stylesheet" href="../css/style.css"></head><body>
-<nav><a href="index.html">Home</a></nav>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Alumni Register</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="jobs.html">Jobs</a>
+  <a href="mentorship.html">Mentorship</a>
+  <a href="donation.html">Donation</a>
+</nav>
+
 <div class="container">
   <h2>Alumni Register</h2>
+
   <form id="regForm">
     <input id="name" placeholder="Name" required>
     <input id="email" placeholder="Email" type="email" required>
     <input id="phone" placeholder="Phone">
     <input id="password" placeholder="Password" type="password" required>
-    <select id="batch"><option value="">Select Batch</option></select>
-    <select id="dept"><option value="">Select Department</option></select>
+
+    <select id="batch">
+      <option value="">Select Batch</option>
+    </select>
+
+    <select id="dept">
+      <option value="">Select Department</option>
+    </select>
+
     <input id="position" placeholder="Current Position">
+
     <button type="submit">Register</button>
   </form>
+
+  <!-- LOGIN OPTION ADDED -->
+  <p style="margin-top: 15px;">
+    Already have an account?
+    <a href="alumni_login.html">Login here</a>
+  </p>
+
 </div>
+
 <script>
 const api = "http://localhost:5000/api";
+
 async function loadMeta(){
   const batchSelect = document.getElementById('batch');
-  [2018,2019,2020,2021].forEach(y => { let o = document.createElement('option'); o.value = y; o.text = y; batchSelect.add(o);});
+  [2018,2019,2020,2021].forEach(y => {
+    let o = document.createElement('option');
+    o.value = y; o.text = y;
+    batchSelect.add(o);
+  });
+
   const dept = document.getElementById('dept');
-  ['Computer Science','Electronics','Mechanical'].forEach(d => { let o = document.createElement('option'); o.value = d; o.text = d; dept.add(o);});
+  ['Computer Science','Electronics','Mechanical'].forEach(d => {
+    let o = document.createElement('option');
+    o.value = d; o.text = d;
+    dept.add(o);
+  });
 }
+
 document.getElementById('regForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+
   const payload = {
     name: document.getElementById('name').value,
     email: document.getElementById('email').value,
@@ -30,10 +75,19 @@ document.getElementById('regForm').addEventListener('submit', async (e) => {
     password: document.getElementById('password').value,
     current_position: document.getElementById('position').value
   };
-  const res = await fetch(api + '/auth/alumni/register', {method:'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+
+  const res = await fetch(api + '/auth/alumni/register', {
+    method:'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(payload)
+  });
+
   const data = await res.json();
   alert(JSON.stringify(data));
 });
+
 loadMeta();
 </script>
-</body></html>
+
+</body>
+</html>

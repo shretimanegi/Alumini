@@ -1,33 +1,81 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Jobs</title><link rel="stylesheet" href="../css/style.css"></head><body>
-<nav><a href="index.html">Home</a></nav>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jobs</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="jobs.html">Jobs</a>
+  <a href="mentorship.html">Mentorship</a>
+  <a href="donation.html">Donation</a>
+</nav>
+
 <div class="container">
-  <h2>Jobs</h2>
-  <div id="jobs"></div>
-  <h3>Post Job (Alumni)</h3>
+
+  <h2>Post Job (Alumni)</h2>
   <form id="jobForm">
     <input id="title" placeholder="Title" required>
     <textarea id="desc" placeholder="Description"></textarea>
     <input id="deadline" type="date">
     <button type="submit">Post</button>
   </form>
+
+  <hr>
+
+  <h2>Jobs</h2>
+  <div id="jobs"></div>
+
 </div>
+
 <script>
 const api = "http://localhost:5000/api";
+
 async function loadJobs(){
   const res = await fetch(api + '/jobs/');
   const data = await res.json();
   const container = document.getElementById('jobs');
-  container.innerHTML = data.map(j => `<div><h4>${j.title}</h4><p>${j.description}</p><small>Deadline: ${j.deadline || 'N/A'}</small></div>`).join('');
+
+  container.innerHTML = data.map(j => `
+    <div>
+      <h4>${j.title}</h4>
+      <p>${j.description}</p>
+      <small>Deadline: ${j.deadline || 'N/A'}</small>
+    </div>
+  `).join('');
 }
+
 document.getElementById('jobForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+
   const token = localStorage.getItem('token');
-  const payload = { title: document.getElementById('title').value, description: document.getElementById('desc').value, deadline: document.getElementById('deadline').value };
-  const res = await fetch(api + '/jobs/', { method:'POST', headers: {'Content-Type':'application/json', 'Authorization': token? 'Bearer ' + token : ''}, body: JSON.stringify(payload)});
-  const data = await res.json();
-  alert(JSON.stringify(data));
+
+  const payload = {
+    title: document.getElementById('title').value,
+    description: document.getElementById('desc').value,
+    deadline: document.getElementById('deadline').value
+  };
+
+  const res = await fetch(api + '/jobs/', {
+    method:'POST',
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization': token ? 'Bearer ' + token : ''
+    },
+    body: JSON.stringify(payload)
+  });
+
+  alert(JSON.stringify(await res.json()));
   loadJobs();
 });
+
 loadJobs();
 </script>
-</body></html>
+
+</body>
+</html>
